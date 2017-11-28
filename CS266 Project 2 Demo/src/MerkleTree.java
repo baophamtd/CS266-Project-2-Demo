@@ -8,7 +8,8 @@ public class MerkleTree {
 
   String root;
 
-  public MerkleTree(List<String> nodeList) {
+  public MerkleTree(List<String> nodeList) 
+  {
     this.nodes = nodeList;
     root = "";
   }
@@ -17,12 +18,15 @@ public class MerkleTree {
     
     List<String> tempNodes = new ArrayList<String>();
     
-    for (int i = 0; i < this.nodes.size(); i++) {
+    for (int i = 0; i < this.nodes.size(); i++) 
+    {
     	tempNodes.add(this.nodes.get(i));
     }
     
     List<String> updatedList = getUpdate(tempNodes);
-    while (updatedList.size() != 1) {
+    
+    while (updatedList.size() != 1) 
+    {
     	updatedList = getUpdate(updatedList);
     }
     
@@ -33,18 +37,21 @@ public class MerkleTree {
     
     List<String> updatedList = new ArrayList<String>();
     int index = 0;
-    while (index < tempNodes.size()) {
+    
+    while (index < tempNodes.size())
+    {
 
       String left = tempNodes.get(index);
       index++;
 
       String right = "";
-      if (index != tempNodes.size()) {
+      if (index != tempNodes.size()) 
+      {
         right = tempNodes.get(index);
       }
 
-      String sha2HexValue = getSHA2HexValue(left + right);
-      updatedList.add(sha2HexValue);
+      String hashValue = getHash(left + right);
+      updatedList.add(hashValue);
       index++;
       
     }
@@ -52,14 +59,19 @@ public class MerkleTree {
     return updatedList;
   }
 
-  public String getSHA2HexValue(String str) {
+  public String getHash(String str) 
+  {
         byte[] cipher_byte;
-        try{
+        
+        try
+        {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(str.getBytes());
             cipher_byte = md.digest();
             StringBuilder sb = new StringBuilder(2 * cipher_byte.length);
-            for(byte b: cipher_byte) {
+            
+            for(byte b: cipher_byte) 
+            {
               sb.append(String.format("%02x", b&0xff) );
             }
             return sb.toString();
@@ -70,7 +82,8 @@ public class MerkleTree {
         return "";
   }
 
-  public String getRoot() {
+  public String getRoot() 
+  {
     return this.root;
   }
     
