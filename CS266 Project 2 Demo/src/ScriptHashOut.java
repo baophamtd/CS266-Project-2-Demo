@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 public class ScriptHashOut {
 	
 	public static String hashScript() throws Exception{
-  InputStream fis =  new FileInputStream("/Users/baopham/Downloads/CS266-Project-2-Demo-master/CS266 Project 2 Demo/src/Script.java");
+  InputStream fis =  new FileInputStream("E:/SchoolJava/CS266 Project 2 Demo/src/Script.java");
 
   byte[] buffer = new byte[1024];
   MessageDigest complete = MessageDigest.getInstance("MD5");
@@ -26,7 +26,6 @@ public class ScriptHashOut {
 		    result +=
 		          Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
 		  }
-		  System.out.println(result);
 		  return result;
 		}
 
